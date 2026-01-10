@@ -1,10 +1,18 @@
 import { useState } from "react";
 
 function NoteForm() {
-  const [title, setTitle] = useState("");
-  const [priority, setPriority] = useState("Medium");
-  const [category, setCategory] = useState("Work");
-  const [description, setDescription] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    priority: "Medium",
+    category: "Work",
+    description: "",
+  });
+
+  function handleChange(e) {
+    setFormData((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
+  }
 
   return (
     <form className="mb-6">
@@ -15,8 +23,8 @@ function NoteForm() {
         <input
           className="w-full p-2 border rounded-lg"
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={formData.title}
+          onChange={handleChange}
           id="title"
           name="title"
         />
@@ -28,8 +36,8 @@ function NoteForm() {
         <select
           className="w-full p-2 border rounded-lg"
           type="text"
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
+          value={formData.priority}
+          onChange={handleChange}
           id="priority"
           name="priority"
         >
@@ -45,8 +53,8 @@ function NoteForm() {
         <select
           className="w-full p-2 border rounded-lg"
           type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          value={formData.category}
+          onChange={handleChange}
           id="category"
           name="category"
         >
@@ -62,13 +70,16 @@ function NoteForm() {
         <textarea
           className="w-full p-2 border rounded-lg"
           type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={formData.description}
+          onChange={handleChange}
           id="description"
           name="description"
         ></textarea>
       </div>
-      <button className="w-full bg-purple-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600">
+      <button
+        type="submit"
+        className="w-full bg-purple-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600"
+      >
         Add Note
       </button>
     </form>
