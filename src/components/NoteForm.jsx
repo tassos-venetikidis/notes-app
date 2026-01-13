@@ -1,4 +1,7 @@
 import { useState } from "react";
+import TextInput from "./inputs/TextInput.jsx";
+import SelectInput from "./inputs/SelectInput.jsx";
+import TextAreaInput from "./inputs/TextAreainput.jsx";
 
 function NoteForm({ notes, setNotes }) {
   const [formData, setFormData] = useState({
@@ -46,66 +49,42 @@ function NoteForm({ notes, setNotes }) {
       </button>
       {isFormVisible && (
         <form className="mb-6" onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="title" className="block font-semibold">
-              Title
-            </label>
-            <input
-              className="w-full p-2 border rounded-lg"
-              type="text"
-              value={formData.title}
-              onChange={handleChange}
-              id="title"
-              name="title"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="priority" className="block font-semibold">
-              Priority
-            </label>
-            <select
-              className="w-full p-2 border rounded-lg"
-              type="text"
-              value={formData.priority}
-              onChange={handleChange}
-              id="priority"
-              name="priority"
-            >
-              <option value="High">🔴 High</option>
-              <option value="Medium">🟡 Medium</option>
-              <option value="Low">🟢 Low</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="category" className="block font-semibold">
-              Category
-            </label>
-            <select
-              className="w-full p-2 border rounded-lg"
-              type="text"
-              value={formData.category}
-              onChange={handleChange}
-              id="category"
-              name="category"
-            >
-              <option value="Work">🗂️ Work</option>
-              <option value="Personal">🏚️ Personal</option>
-              <option value="Idea">💡 Idea</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="description" className="block font-semibold">
-              Description
-            </label>
-            <textarea
-              className="w-full p-2 border rounded-lg"
-              type="text"
-              value={formData.description}
-              onChange={handleChange}
-              id="description"
-              name="description"
-            ></textarea>
-          </div>
+          <TextInput
+            name="title"
+            label="Title"
+            value={formData.title}
+            onChange={handleChange}
+            required={true}
+          />
+          <SelectInput
+            name="priority"
+            label="Priority"
+            value={formData.priority}
+            onChange={handleChange}
+            options={[
+              { value: "High", label: "🔴 High" },
+              { value: "Medium", label: "🟡 Medium" },
+              { value: "Low", label: "🟢 Low" },
+            ]}
+          />
+          <SelectInput
+            name="category"
+            label="Category"
+            value={formData.category}
+            onChange={handleChange}
+            options={[
+              { value: "Work", label: "🗂️ Work" },
+              { value: "Personal", label: "🏚️ Personal" },
+              { value: "Idea", label: "💡 Idea" },
+            ]}
+          />
+          <TextAreaInput
+            name={"description"}
+            label={"Description"}
+            value={formData.description}
+            onChange={handleChange}
+            required={true}
+          />
           <button
             type="submit"
             className="w-full bg-purple-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600"
